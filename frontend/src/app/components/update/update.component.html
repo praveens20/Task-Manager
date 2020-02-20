@@ -1,0 +1,67 @@
+<div class="form-group">
+    <label for="category">Select the Category</label>
+    <select class="form-control" id="category" [(ngModel)]="category" name="category" (change)="showSelectedTasks()" required>
+      <option>Pending</option>
+      <option>In Process</option>
+      <option>Completed</option>
+    </select>
+</div>
+
+ 
+
+<div class="row" *ngIf='(category!="")' >
+    <div class="col-lg-6">
+      <div class="bs-component">
+        <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+          <div class="card-header text-center"> Tasks</div>
+          <div class="card-body">
+            <table class="table table-dark table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Task Name</th>
+                    <th scope="col">Update</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="table-success" *ngFor='let task of tasks'>
+                    <td>{{task.name}}</td>
+                    <td><button type="button" class="btn btn-info" (click)="onClickUpdate(task)">Update</button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>         
+         </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6" *ngIf='update'>
+      <div class="bs-component">
+        <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+          <div class="card-header text-center">Update Task</div>
+          <div class="card-body">
+            <form>
+                <fieldset>
+                  <div class="form-group">
+                    <label for="name">Task Name</label>
+                    <input type="text" class="form-control" id="name" [(ngModel)]="name" name="name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="category">Select the Category</label>
+                    <select class="form-control" id="category" [(ngModel)]="category" name="category" required>
+                      <option>Pending</option>
+                      <option>In Process</option>
+                      <option>Completed</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="priority">Priority <span class="text-dark"> <strong>(Number only)</strong> </span></label>
+                    <input type="number" class="form-control" id="priority" [(ngModel)]="priority" name="priority" required>
+                  </div>
+                  <button type="button" class="btn btn-secondary" (click)="updateTask(task)">Update this task</button>
+                </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

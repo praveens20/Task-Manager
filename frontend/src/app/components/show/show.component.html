@@ -1,0 +1,94 @@
+<fieldset class="form-group">
+    <div class="form-check">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="showby" id="showfull" value="full" checked="" (change)="changeShow($event)">
+        Show Full Details
+      </label>
+    </div>
+    <div class="form-check">
+    <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="showby" id="showbycategory" value="category" (change)="changeShow($event)" (click)="showCategorisedTasks()">
+        Show By Category
+      </label>
+    </div>
+    <div class="form-check">
+    <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="showby" id="showbypriority" value="priority" (change)="changeShow($event)" (click)="showSortedTasks()">
+        Show By Priority
+      </label>
+    </div>
+  </fieldset>
+
+
+  
+  <table class="table table-dark table-hover" *ngIf="(show=='full');">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Task Name</th>
+          <th scope="col">Category</th>
+          <th scope="col">Priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-success" *ngFor='let task of tasks'>
+          <td>{{task._id}}</td>
+          <td>{{task.name}}</td>
+          <td>{{task.category}}</td>
+          <td>{{task.priority}}</td>
+        </tr>
+      </tbody>
+    </table> 
+
+
+  
+    <div class="row" *ngIf="(show=='category');">
+      <div class="col-lg-4">
+        <div class="bs-component">
+          <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+            <div class="card-header">Pending</div>
+            <div class="card-body" *ngFor="let item of pending">
+              <h4 class="card-title">{{item.name}}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="bs-component">
+          <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
+            <div class="card-header">In Process</div>
+            <div class="card-body" *ngFor="let item of inProcess">
+              <h4 class="card-title">{{item.name}}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="bs-component">
+          <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+            <div class="card-header">Completed</div>
+            <div class="card-body" *ngFor="let item of completed">
+              <h4 class="card-title">{{item.name}}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+  
+    <table class="table table-dark table-hover" *ngIf="(show=='priority');">
+      <thead>
+        <tr>
+          <th scope="col">Priority</th>
+          <th scope="col">Task Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-success" *ngFor='let item of sorted'>
+          <td>{{item.priority}}</td>
+          <td>{{item.name}}</td>
+        </tr>
+      </tbody>
+    </table> 
+  
